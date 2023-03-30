@@ -1,4 +1,4 @@
 export const AppRoute = {
-  Index: { value: 0, rout: '/' },
-  Converter: { value: 1, rout: '/converter' },
+  Index: { value: 0, rout: 'currency_converter/' },
+  Converter: { value: 1, rout: 'currency_converter/converter' },
 }
