@@ -15,7 +15,7 @@ class AppStore {
 
   baseCurrency: string = 'USD'
 
-  targetCurrency: string = 'EUR'
+  targetCurrency: string = 'USD'
 
   isLoading = false
 

@@ -1,13 +1,15 @@
 import { FC, useState, ChangeEvent, useEffect } from 'react'
 
+import CachedIcon from '@mui/icons-material/Cached'
 import { OutlinedInput, FormControl, InputLabel } from '@mui/material'
 import { observer } from 'mobx-react-lite'
 
 import style from './Converter.module.scss'
 
 import { Loader } from 'components/Loader/Loader'
+import { PopularCurrencies } from 'components/PopularCurrencies/PopularCurrencies'
 import { BasicSelect } from 'components/Select/Select'
-import { LocalStorageKey } from 'enums/localStorageKey'
+import { StorageKey } from 'enums/storageKey'
 import appStore from 'store/appStore'
 import { getLocalStorageData } from 'utils/getLocalStorageData'
 import {
@@ -33,11 +35,14 @@ export const Converter: FC = observer(() => {
     defaultTargetCurrencyValue,
   )
 
+  const rememberData = (): void => {
+    setLocalStorageData(StorageKey.baseCurrencyValue, baseCurrencyValue)
+    setLocalStorageData(StorageKey.targetCurrencyValue, targetCurrencyValue)
+  }
+
   useEffect(() => {
-    const memoValueBaseCurrency = getLocalStorageData(LocalStorageKey.baseCurrencyValue)
-    const memoTargetCurrencyValue = getLocalStorageData(
-      LocalStorageKey.targetCurrencyValue,
-    )
+    const memoValueBaseCurrency = getLocalStorageData(StorageKey.baseCurrencyValue)
+    const memoTargetCurrencyValue = getLocalStorageData(StorageKey.targetCurrencyValue)
 
     if (memoValueBaseCurrency && memoTargetCurrencyValue) {
       setBaseCurrencyValue(memoValueBaseCurrency)
@@ -50,21 +55,23 @@ export const Converter: FC = observer(() => {
       const course = getCurrencyCourse(targetCurrency)
       const newValue = getNewTargetCurrencyValue(baseCurrencyValue, course)
       setTargetCurrencyValue(newValue)
-      setLocalStorageData(LocalStorageKey.baseCurrencyValue, baseCurrencyValue)
-      setLocalStorageData(LocalStorageKey.targetCurrencyValue, targetCurrencyValue)
     }
   }, [baseCurrencyValue, targetCurrency, isLoading])
 
   const changeHandle = (event: ChangeEvent<HTMLInputElement>): void => {
     if (event.target.value !== '') {
       setBaseCurrencyValue(Number(event.target.value))
+      rememberData()
     } else {
       setBaseCurrencyValue(null)
+      localStorage.removeItem(StorageKey.baseCurrencyValue)
+      localStorage.removeItem(StorageKey.targetCurrencyValue)
     }
   }
 
   return (
     <div className={style.main}>
+      <PopularCurrencies setBaseCurrency={setBaseCurrency} />
       <div className={style.targetCurrency}>
         <BasicSelect
           currency={baseCurrency}
@@ -85,6 +92,7 @@ export const Converter: FC = observer(() => {
           />
         </FormControl>
       </div>
+      <CachedIcon fontSize="large" color="primary" />
 
       <div className={style.targetCurrency}>
         <BasicSelect
@@ -106,6 +114,7 @@ export const Converter: FC = observer(() => {
           />
         </FormControl>
       </div>
+      <PopularCurrencies setBaseCurrency={setTargetCurrency} />
     </div>
   )
 })
