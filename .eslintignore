@@ -1,0 +1,17 @@
+# dependencies
+/node_modules
+
+*.css
+*.scss
+*.json
+*.d.ts
+
+# testing
+/coverage
+
+# production
+/build
+
+# .idea
+.idea
+
