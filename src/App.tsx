@@ -21,7 +21,7 @@ const App: FC = observer(() => {
 
   return (
     <div className={style.App}>
-      <HashRouter>
+      <HashRouter basename={AppRoute.Index.rout}>
         <Header />
         <Routes>
           <Route path={AppRoute.Index.rout} element={<Display />} />
