@@ -1,7 +1,7 @@
 import { FC, useEffect } from 'react'
 
 import { observer } from 'mobx-react-lite'
-import { Route, BrowserRouter, Routes } from 'react-router-dom'
+import { Route, Routes, HashRouter } from 'react-router-dom'
 
 import style from './App.module.scss'
 
@@ -21,14 +21,14 @@ const App: FC = observer(() => {
 
   return (
     <div className={style.App}>
-      <BrowserRouter>
+      <HashRouter>
         <Header />
         <Routes>
           <Route path={AppRoute.Index.rout} element={<Display />} />
           <Route path={AppRoute.Converter.rout} element={<Converter />} />
         </Routes>
         <Description />
-      </BrowserRouter>
+      </HashRouter>
     </div>
   )
 })
