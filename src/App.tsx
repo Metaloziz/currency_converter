@@ -6,6 +6,7 @@ import { Route, BrowserRouter, Routes } from 'react-router-dom'
 import style from './App.module.scss'
 
 import { Converter } from 'components/Converter/Converter'
+import { Description } from 'components/Descriptoon/Description'
 import { Display } from 'components/Display/Display'
 import { Header } from 'components/Header/Header'
 import { AppRoute } from 'constants/appRoute'
@@ -26,6 +27,7 @@ const App: FC = observer(() => {
           <Route path={AppRoute.Index.rout} element={<Display />} />
           <Route path={AppRoute.Converter.rout} element={<Converter />} />
         </Routes>
+        <Description />
       </BrowserRouter>
     </div>
   )
