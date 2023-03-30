@@ -8,7 +8,7 @@ import style from './App.module.scss'
 import { Converter } from 'components/Converter/Converter'
 import { Display } from 'components/Display/Display'
 import { Header } from 'components/Header/Header'
-import { AppRoute } from 'enums/appRoute'
+import { AppRoute } from 'constants/appRoute'
 import appStore from 'store/appStore'
 
 const App: FC = observer(() => {

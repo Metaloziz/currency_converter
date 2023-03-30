@@ -7,7 +7,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 
 import style from './Header.module.scss'
 
-import { AppRoute } from 'enums/appRoute'
+import { AppRoute } from 'constants/appRoute'
 
 export const Header: FC = () => {
   const navigate = useNavigate()

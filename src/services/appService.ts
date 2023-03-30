@@ -4,9 +4,9 @@ import { instance } from 'services/instance'
 import { CurrenciesType } from 'types/currenciesType'
 
 export const apiService = {
-  getData: async (date: string, baseCurrency: string) => {
-    const { data }: AxiosResponse<CurrenciesType> = await instance.get(date, {
-      params: { base: baseCurrency },
+  getData: async (baseCurrency: string) => {
+    const { data }: AxiosResponse<CurrenciesType> = await instance.get('', {
+      params: { base_currency: baseCurrency },
     })
 
     return data

@@ -1,5 +1,5 @@
-export const LocalStorageKey = {
-  baseCurrencyValue: 'baseCurrencyValue',
-  targetCurrencyValue: 'targetCurrencyValue',
-  baseCurrency: 'targetCurrencyValue',
+export enum LocalStorageKey {
+  baseCurrencyValue = 'baseCurrencyValue',
+  targetCurrencyValue = 'targetCurrencyValue',
+  baseCurrency = 'targetCurrencyValue',
 }

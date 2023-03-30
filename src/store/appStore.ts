@@ -41,15 +41,11 @@ class AppStore {
 
   getCurrenciesCourse = (): void => {
     this.execute(async () => {
-      const response = await apiService.getData(this.date, this.baseCurrency)
+      const response = await apiService.getData(this.baseCurrency)
 
       await runInAction(() => {
-        if (response.success) {
+        if (response) {
           this.data = response
-        }
-
-        if (this.baseCurrency !== response.base) {
-          this.baseCurrency = response.base
         }
 
         this.setCurrenciesNames()
@@ -57,7 +53,7 @@ class AppStore {
     })
   }
 
-  getRates = (): RatesType => this.data.rates
+  getRates = (): RatesType => this.data.data
 
   setCurrenciesNames = (): void => {
     this.currenciesNames = Object.keys(this.getRates())
@@ -71,14 +67,14 @@ class AppStore {
     this.targetCurrency = name
   }
 
-  getCurrencyCourse = (name: string): number => this.data.rates[name]
+  getCurrencyCourse = (name: string): number => this.data.data[name].value
 
   getConvertedRates = (): ConvertRateType[] => {
     const rates = this.getRates()
 
     return Object.keys(rates).map(item => ({
       name: item,
-      course: rates[item],
+      course: rates[item].value,
     }))
   }
 }

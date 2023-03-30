@@ -1,12 +1,12 @@
+export type CurrencyType = { code: string; value: number }
+
 export type RatesType = {
-  [key: string]: number
+  [key: string]: CurrencyType
 }
 
 export type CurrenciesType = {
-  success: boolean
-  timestamp: number
-  historical: boolean
-  base: string
-  date: string
-  rates: RatesType
+  meta: {
+    last_updated_at: string
+  }
+  data: RatesType
 }
